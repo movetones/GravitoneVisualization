@@ -120,14 +120,14 @@ const animate = () => {
 init();
 animate();
 
-var exampleSocket = new WebSocket("ws://127.0.0.1:5678/");
+var exampleSocket = new WebSocket("ws://localhost:5678/");
 var lp = 0;
 
 exampleSocket.onmessage = function(event) {
   console.log(event.data)
   var jsonObj = JSON.parse(event.data);
   
-  if ( !jsonObj.hasOwnProperty("quat_z") ){
+  if ( !jsonObj.hasOwnProperty("data") ){
     /*if( jsonObj.b2 ){
       group.children[1].material.color.setHex(0xaa1919);
     } else {
@@ -136,6 +136,8 @@ exampleSocket.onmessage = function(event) {
     return;
   } 
   
+  jsonObj = jsonObj.data;
+
   // You'll need to edit the order of the quaternions below so that the 3D object matches up with your sensor.
   var targetQuaternion = new THREE.Quaternion(jsonObj.quat_z, jsonObj.quat_y, jsonObj.quat_w, jsonObj.quat_x);       
  // mesh.quaternion.slerp(targetQuaternion, 1);
